@@ -81,6 +81,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
 	TSubclassOf<AActor> targetsType;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
+	FName targetsTag = NAME_None;
+
 	// Preconditions or requirements needed to perform the action.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = WorldState)
 	TArray<FAtom> preconditions;
