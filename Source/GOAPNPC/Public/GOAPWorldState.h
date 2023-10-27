@@ -17,16 +17,12 @@
 class GOAPNPC_API GOAPWorldState
 {
 private:
-
 	TMap<FGameplayTag, bool> atoms;
 
 public:
-
 	GOAPWorldState();
-
-	~GOAPWorldState();
-
 	GOAPWorldState(const TMap<FGameplayTag, bool>& atoms);
+	~GOAPWorldState();
 
 	bool operator==(const GOAPWorldState& w) const;
 

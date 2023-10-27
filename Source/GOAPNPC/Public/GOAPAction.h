@@ -23,7 +23,7 @@
 USTRUCT(BlueprintType)
 struct GOAPNPC_API FAtom
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
 	FAtom() = default;
 
@@ -33,9 +33,9 @@ struct GOAPNPC_API FAtom
 	{}
 
 #if WITH_EDITORONLY_DATA
-		// DEPRECATED: Name of the atom (predicate).
-		UPROPERTY(meta = (DeprecatedProperty, DeprecationMessage = "Use gameplay tag instead."))
-		FString name_DEPRECATED;
+	// DEPRECATED: Name of the atom (predicate).
+	UPROPERTY(meta = (DeprecatedProperty, DeprecationMessage = "Use gameplay tag instead."))
+	FString name_DEPRECATED;
 
 	void PostSerialize(const FArchive& Ar);
 #endif
@@ -45,9 +45,8 @@ struct GOAPNPC_API FAtom
 	FGameplayTag tag;
 
 	// Value of the atom (truth value).
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Atom)
-		bool value = false;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (Category = "Atom"))
+	bool value = false;
 };
 
 #if WITH_EDITORONLY_DATA
@@ -71,29 +70,26 @@ class GOAPNPC_API UGOAPAction : public UObject
 	GENERATED_BODY()
 
 public:
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
-		FString name;
+	FString name;
 
 	// Cost of the action. The planner will take this into account when making the cheapest plan.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
-		float cost;
+	float cost;
 
 	// Object or class type of actor this action's target should have. This can be None if your action doesn't need a target.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
-		TSubclassOf<AActor> targetsType;
+	TSubclassOf<AActor> targetsType;
 
 	// Preconditions or requirements needed to perform the action.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = WorldState)
-		TArray<FAtom> preconditions;
+	TArray<FAtom> preconditions;
 
 	// Effects or postconditions caused by the action.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = WorldState)
-		TArray<FAtom> effects;
-
+	TArray<FAtom> effects;
 
 private:
-
 	AActor* target = nullptr;
 
 	GOAPWorldState wsPreconditions;
@@ -103,48 +99,44 @@ private:
 public:
 	// Search all actors of targetsType class located in the world.
 	UFUNCTION(BlueprintCallable, Category = GOAPAction)
-		TArray<AActor*> getTargetsList(APawn* p) const;
+	TArray<AActor*> getTargetsList(APawn* p) const;
 
 	// Optional function to check if it's possible to perform the action.
 	UFUNCTION(BlueprintImplementableEvent, Category = GOAPAction)
-		bool checkProceduralPrecondition(APawn* p);
+	bool checkProceduralPrecondition(APawn* p);
 
 	// Performs the action.
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = GOAPAction)
-		bool doAction(APawn* p);
+	bool doAction(APawn* p);
 
 	// Generate action's preconditions and effects.
 	void create_P_E();
 
 	// COMPARATORS
-
 	bool operator==(const UGOAPAction& action) const;
-
 	bool operator!=(const UGOAPAction& action) const;
 
 	// GETS
-
 	FString getName() const;
 
 	float getCost() const;
 
 	// Gets the chosen target from targetList or the one specific in setTarget().
 	UFUNCTION(BlueprintCallable, Category = GOAPAction)
-		AActor* getTarget() const;
+	AActor* getTarget() const;
 
 	const GOAPWorldState& getPreconditions() const;
 
 	const GOAPWorldState& getEffects() const;
 
 	// SETS
-
 	void setName(FString n);
 
 	void setCost(float c);
 
 	// Sets a specific target.
 	UFUNCTION(BlueprintCallable, Category = GOAPAction)
-		void setTarget(AActor* t);
+	void setTarget(AActor* t);
 
 	void setPreconditions(GOAPWorldState preconditionAtoms);
 

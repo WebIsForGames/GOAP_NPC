@@ -65,7 +65,10 @@ TArray<AActor*> UGOAPAction::getTargetsList(APawn* p) const
 
 bool UGOAPAction::operator==(const UGOAPAction& a) const
 {
-	return this->cost == a.getCost() && target == a.getTarget() && wsPreconditions == a.getPreconditions() && wsEffects == a.getEffects();
+	return	(cost == a.getCost()) &&
+			(target == a.getTarget()) &&
+			(wsPreconditions == a.getPreconditions()) &&
+			(wsEffects == a.getEffects());
 }
 
 bool UGOAPAction::operator!=(const UGOAPAction& a) const
