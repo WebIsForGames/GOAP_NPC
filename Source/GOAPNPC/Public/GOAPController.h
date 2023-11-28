@@ -25,15 +25,6 @@ class GOAPNPC_API AGOAPController : public AAIController
 	GENERATED_BODY()
 
 public:
-
-	// Debug info
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GOAP)
-		bool debug;
-
-	//Include controller's name
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GOAP)
-		bool controller;
-
 	AGOAPController();
 
 	virtual void BeginPlay() override;
@@ -48,8 +39,12 @@ protected:
 
 	// Creates and execute the plan.
 	UFUNCTION(BlueprintCallable, Category = GOAPController)
-		bool executeGOAP();
+	bool ExecuteGOAP();
+
+	// Debug info
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GOAP)
+	bool DebugPrint;
 
 private:
-	void debugInfo();
+	void ShowDebugInfo();
 };
