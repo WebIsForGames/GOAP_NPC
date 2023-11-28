@@ -52,7 +52,7 @@ void UGOAPAction::create_P_E()
 	if (targetsType == nullptr)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Targets' type of '%s' action are not defined."), *name);
-	}
+}
 }
 
 TArray<AActor*> UGOAPAction::getTargetsList(APawn* p) const
@@ -130,4 +130,9 @@ void UGOAPAction::setPreconditions(GOAPWorldState pre)
 void UGOAPAction::setEffects(GOAPWorldState ef)
 {
 	wsEffects = ef;
+}
+
+bool UGOAPAction::checkProceduralPrecondition_Implementation(APawn* p)
+{
+	return true;
 }

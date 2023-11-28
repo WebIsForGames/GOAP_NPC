@@ -105,8 +105,9 @@ public:
 	TArray<AActor*> getTargetsList(APawn* p) const;
 
 	// Optional function to check if it's possible to perform the action.
-	UFUNCTION(BlueprintImplementableEvent, Category = GOAPAction)
+	UFUNCTION(BlueprintNativeEvent, Category = GOAPAction)
 	bool checkProceduralPrecondition(APawn* p);
+	bool checkProceduralPrecondition_Implementation(APawn* p);
 
 	// Performs the action.
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = GOAPAction)
