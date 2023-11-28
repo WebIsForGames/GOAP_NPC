@@ -48,27 +48,11 @@ void UGOAPAction::create_P_E()
 	{
 		wsEffects.addAtom(itE.tag, itE.value);
 	}
-
-	if (targetsType == nullptr)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Targets' type of '%s' action are not defined."), *name);
-}
-}
-
-TArray<AActor*> UGOAPAction::getTargetsList(APawn* p) const
-{
-	TArray<AActor*> actorsFound;
-	if (targetsTag != NAME_None)
-		UGameplayStatics::GetAllActorsOfClassWithTag(p->GetWorld(), targetsType, targetsTag, actorsFound);
-	else
-		UGameplayStatics::GetAllActorsOfClass(p->GetWorld(), targetsType, actorsFound);
-	return actorsFound;
 }
 
 bool UGOAPAction::operator==(const UGOAPAction& a) const
 {
 	return	(cost == a.getCost()) &&
-			(target == a.getTarget()) &&
 			(wsPreconditions == a.getPreconditions()) &&
 			(wsEffects == a.getEffects());
 }
@@ -88,11 +72,6 @@ FString UGOAPAction::getName() const
 float UGOAPAction::getCost() const
 {
 	return cost;
-}
-
-AActor* UGOAPAction::getTarget() const
-{
-	return target;
 }
 
 const GOAPWorldState& UGOAPAction::getPreconditions() const
@@ -115,11 +94,6 @@ void UGOAPAction::setName(FString n)
 void UGOAPAction::setCost(float c)
 {
 	cost = c;
-}
-
-void UGOAPAction::setTarget(AActor* t)
-{
-	target = t;
 }
 
 void UGOAPAction::setPreconditions(GOAPWorldState pre)

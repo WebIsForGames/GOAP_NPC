@@ -77,13 +77,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
 	float cost;
 
-	// Object or class type of actor this action's target should have. This can be None if your action doesn't need a target.
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
-	TSubclassOf<AActor> targetsType;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
-	FName targetsTag = NAME_None;
-
 	// Preconditions or requirements needed to perform the action.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = WorldState)
 	TArray<FAtom> preconditions;
@@ -93,17 +86,11 @@ public:
 	TArray<FAtom> effects;
 
 private:
-	AActor* target = nullptr;
-
 	GOAPWorldState wsPreconditions;
 
 	GOAPWorldState wsEffects;
 
 public:
-	// Search all actors of targetsType class located in the world.
-	UFUNCTION(BlueprintCallable, Category = GOAPAction)
-	TArray<AActor*> getTargetsList(APawn* p) const;
-
 	// Optional function to check if it's possible to perform the action.
 	UFUNCTION(BlueprintNativeEvent, Category = GOAPAction)
 	bool checkProceduralPrecondition(APawn* p);
@@ -125,10 +112,6 @@ public:
 
 	float getCost() const;
 
-	// Gets the chosen target from targetList or the one specific in setTarget().
-	UFUNCTION(BlueprintCallable, Category = GOAPAction)
-	AActor* getTarget() const;
-
 	const GOAPWorldState& getPreconditions() const;
 
 	const GOAPWorldState& getEffects() const;
@@ -137,10 +120,6 @@ public:
 	void setName(FString n);
 
 	void setCost(float c);
-
-	// Sets a specific target.
-	UFUNCTION(BlueprintCallable, Category = GOAPAction)
-	void setTarget(AActor* t);
 
 	void setPreconditions(GOAPWorldState preconditionAtoms);
 
