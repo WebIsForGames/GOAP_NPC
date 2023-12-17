@@ -56,3 +56,12 @@ struct TStructOpsTypeTraits<FAtom> : public TStructOpsTypeTraitsBase2<FAtom>
 };
 #endif
 
+
+USTRUCT(Blueprintable)
+struct GOAPNPC_API FAtomArray
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+	TArray<FAtom> DesiredState;
+};

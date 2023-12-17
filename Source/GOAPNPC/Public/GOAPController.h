@@ -10,10 +10,13 @@
 #include "CoreMinimal.h"
 #include "AIController.h"
 
+#include "GOAPAtom.h"
+
 #include "GOAPController.generated.h"
 
 
 class UGOAPPlannerComponent;
+
 
  /**
  * AIController containg the planner, states of the current and desired world, and the list of available actions the AI can perform.
@@ -34,15 +37,18 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 
 protected:
+	UPROPERTY(EditAnywhere)
+	TArray<FAtomArray> DesiredStates;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	UGOAPPlannerComponent* PlannerComponent;
 
 	// Creates and execute the plan.
-	UFUNCTION(BlueprintCallable, Category = GOAPController)
+	UFUNCTION(BlueprintCallable)
 	bool ExecuteGOAP();
 
 	// Debug info
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GOAP)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool DebugPrint;
 
 private:

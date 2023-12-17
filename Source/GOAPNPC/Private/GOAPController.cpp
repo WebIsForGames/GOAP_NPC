@@ -34,10 +34,14 @@ bool AGOAPController::ExecuteGOAP()
 	if (!GetPawn())
 		return false;
 
-	if (PlannerComponent->GeneratePlan(GetPawn()))
+	for (const FAtomArray& goal : DesiredStates)
 	{
-		ShowDebugInfo();
-		return PlannerComponent->PerformSingleAction(GetPawn());
+		PlannerComponent->SetGoal(goal.DesiredState);
+		if (PlannerComponent->GeneratePlan(GetPawn()) && (PlannerComponent->GetPlan().Num() > 0))
+		{
+			ShowDebugInfo();
+			return PlannerComponent->PerformSingleAction(GetPawn());
+		}
 	}
 
 	return false;
