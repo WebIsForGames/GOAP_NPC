@@ -8,6 +8,7 @@
 
 #include "GOAPController.h"
 #include "GOAPPlannerComponent.h"
+#include "Engine/Engine.h"
 
 AGOAPController::AGOAPController()
 {
